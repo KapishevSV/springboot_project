@@ -2,6 +2,7 @@ package com.ksv.springboot_project.controller;
 
 import com.ksv.springboot_project.domain.Message;
 import com.ksv.springboot_project.repos.MessageRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import java.util.Map;
 
 @Controller
 public class MainController {
+    @Autowired
     private MessageRepo messageRepo;
 
     public MainController(MessageRepo messageRepo) {
@@ -22,7 +24,7 @@ public class MainController {
         return "greeting";
     }
 
-    @GetMapping("/main")
+    @GetMapping("main")
     public String main(Map<String, Object> model) {
         Iterable<Message> messages = messageRepo.findAll();
 
@@ -30,7 +32,7 @@ public class MainController {
         return "main";
     }
 
-    @PostMapping("/main")
+    @PostMapping("main")
     public String add(@RequestParam String text, @RequestParam String tag, Map<String, Object> model){
         Message message = new Message(text, tag);
         messageRepo.save(message);

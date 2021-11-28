@@ -16,12 +16,12 @@ public class RegistrationController {
     @Autowired
     private UserRepo userRepo;
 
-    @GetMapping("/registration")
+    @GetMapping("registration")
     public String registration(){
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("registration")
     public String addUser(User user, Map<String, Object> model){
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
@@ -34,6 +34,6 @@ public class RegistrationController {
         user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
 
-        return "redirect:/login";
+        return "redirect:login";
     }
 }
